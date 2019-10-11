@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/back-end/.vs/back-end/v16
+/back-end/ConsoleApp1/bin/Debug
+/back-end/ConsoleApp1/obj/Debug
+/back-end/obj/x86/Debug
+/back-end/packages
