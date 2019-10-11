@@ -12,6 +12,8 @@ namespace back_end
 {
     public class Startup
     {
+        Hello hello = new Hello();
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -32,7 +34,7 @@ namespace back_end
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync(hello.getHello());
                 });
             });
         }
