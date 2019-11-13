@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MainNavBar.css';
 import CollapseNavBarMenu from './CollapseNavBarMenu'
-import '../../index.css'
+import '../../App.css'
 
 class MainNavBar extends Component {
     constructor(props) {
