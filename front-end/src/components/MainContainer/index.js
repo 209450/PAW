@@ -5,8 +5,8 @@ import './MainContainer.css'
 class MainContainer extends Component {
     render() {
         return (
-            <Container className="content-container">
-
+            <Container className="content-container" fluid='true'>
+                {this.props.children}
             </Container>
         )
     }

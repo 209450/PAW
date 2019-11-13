@@ -6,3 +6,6 @@ body{
     text-align: center;
   }
 
+.root-container {
+  margin: 1% 5% 1% 5%;
+}
