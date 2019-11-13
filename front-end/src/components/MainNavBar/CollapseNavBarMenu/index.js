@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import {NavDropdown} from 'react-bootstrap'
 
 class CollapseNavBarMenu extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            isLogged: true,
+            nick: "nick"
+        }
+    }
+
     render() {
         return (
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" drop='down'>
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.1">Setting</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
             </NavDropdown>
         )
     }
