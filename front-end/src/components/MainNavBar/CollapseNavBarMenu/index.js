@@ -13,7 +13,7 @@ class CollapseNavBarMenu extends Component {
     render() {
         return (
             <NavDropdown title="Dropdown" id="basic-nav-dropdown" drop='down'>
-                <NavDropdown.Item href="#action/3.1">Setting</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
             </NavDropdown>
