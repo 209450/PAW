@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Button, Container, Table } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MainNavBar from './components/MainNavBar'
+import MainContainer from './components/MainContainer'
+import PageNotFound from './components/PageNotFound'
+import { Switch, Router, Route } from 'react-router-dom'
+
+import { createBrowserHistory } from "history";
+
+const customHistory = createBrowserHistory();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className='root-container' fluid='true'>
+      <Router history={customHistory}>
+        <MainNavBar />
+        <MainContainer>
+          <Switch>
+            <Route exact path='/' component={null} />
+            <Route exact path='/home' component={null} />
+            <Route exact path='/registration' component={null} />
+            <Route exact path='/login' component={null} />
+            <Route component={() => <PageNotFound redirectPath='/'/>} />
+          </Switch>
+        </MainContainer>
+
+      </Router>
+    </Container>
   );
 }
 
