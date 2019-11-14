@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    front-end:
+   front-end:
      build:
         context: front-end
         dockerfile: Dockerfile
@@ -15,13 +15,10 @@ services:
      hostname: back
      ports:
        - "8080:8080"
-   mysql:
-     image: mysql
+   database:
+     build:
+        context: database
+        dockerfile: Dockerfile
      hostname: database
-     environment:
-       MYSQL_DATABASE: 'database'
-       MYSQL_USER: 'user'
-       MYSQL_PASSWORD: 'password'
-       MYSQL_ROOT_PASSWORD: 'rootpasswor'
      ports: 
        - "3306:3306"
