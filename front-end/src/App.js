@@ -22,7 +22,7 @@ function App() {
             <Route exact path='/home' component={null} />
             <Route exact path='/registration' component={null} />
             <Route exact path='/login' component={null} />
-            <Route component={PageNotFound} />
+            <Route component={() => <PageNotFound redirectPath='/'/>} />
           </Switch>
         </MainContainer>
 
