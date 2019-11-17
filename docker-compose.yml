@@ -1,13 +1,26 @@
 version: '3'
 
+networks:
+    frontend-network:
+    backend-network:
+
 services:
+   database:
+     build:
+        context: database
+        dockerfile: Dockerfile
+     hostname: database
+     networks:
+       - backend-network
+     ports: 
+       - "3306:3306"
    front-end:
      build:
         context: front-end
         dockerfile: Dockerfile
      hostname: front
      networks:
-       - frontend
+       - frontend-network
      ports:
        - "3001:3000"
    back-end:
@@ -16,16 +29,8 @@ services:
         dockerfile: Dockerfile
      hostname: back
      networks:
-       - frontend
-       - backend
+       - frontend-network
+       - backend-network
      ports:
        - "8080:8080"
-   database:
-     build:
-        context: database
-        dockerfile: Dockerfile
-     hostname: database
-     networks:
-       - backend
-     ports: 
-       - "3306:3306"
+   
