@@ -1,0 +1,66 @@
+{
+  "Options": {
+  "Pagination": {
+  "ArgumentNameForFirst": "limitItems"
+  }
+  },
+  "SchemaObjects": [
+    {
+      "SingleName": "customer",
+      "ListName": "customers",
+      "Table": "Customers",
+      "Description": "Customer table - contains data about customer",
+      "Fields": [
+      {
+        "Name": "id",
+        "Column": "CustomerID",
+        "DataType": "string",
+        "Description": "Unique identificator - using also to connect with orders"
+      },
+      {
+        "Name": "CompanyName",
+        "DataType": "string"
+      },
+      {
+        "Name": "ContactName",
+        "DataType": "string"
+      }
+      ],
+      "RelatedObjects": [
+        {
+        "Name": "order", // refers to the name of related object
+        "Relex": "orders(CustomerID=\"id\":var)[*]" // query used to load related object
+        },
+        {
+        "Name": "orders",
+        "Relex": "orders(CustomerID=\"id\":var)[*]"
+        }
+      ]
+    },
+    {
+      "SingleName": "order",
+      "ListName": "orders",
+      "Table": "Orders",
+      "Fields": [
+        {
+          "Name": "orderId",
+          "Column": "OrderID",
+          "DataType": "int32"
+        },
+        {
+          "Name": "customerId",
+          "Column": "CustomerID",
+          "DataType": "string"
+        },
+        {
+          "Name": "OrderDate",
+          "DataType": "datetime"
+        },
+        {
+          "Name": "Freight",
+          "DataType": "decimal"
+        }
+      ]
+    }
+  ]
+}

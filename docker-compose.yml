@@ -6,6 +6,8 @@ services:
         context: front-end
         dockerfile: Dockerfile
      hostname: front
+     networks:
+       - frontend
      ports:
        - "3001:3000"
    back-end:
@@ -13,6 +15,9 @@ services:
         context: back-end
         dockerfile: Dockerfile
      hostname: back
+     networks:
+       -frontend
+       -backend
      ports:
        - "8080:8080"
    database:
@@ -20,5 +25,7 @@ services:
         context: database
         dockerfile: Dockerfile
      hostname: database
+     networks:
+       -backend
      ports: 
        - "3306:3306"
