@@ -19,9 +19,7 @@ using NReco.GraphQL.Schemas;
 namespace back_end
 {
     public class Startup
-    {
-        private Hello hello = new Hello();
-        
+    {   
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -61,7 +59,6 @@ namespace back_end
                     File.ReadAllText("schemaDbDefinition.json")//Path.Combine(ApplicationPath, "schemaDbDefinition.json"))
                   )
                 ) ;
-                hello.GraphqlDbAdapter = graphqlAdapter;
                 return graphqlAdapter;
             });
         }
@@ -73,7 +70,7 @@ namespace back_end
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

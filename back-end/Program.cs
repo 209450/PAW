@@ -16,6 +16,7 @@ namespace back_end
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Run();
+            
         }
 
         public static IWebHost CreateHostBuilder(string[] args) =>
