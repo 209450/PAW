@@ -34,6 +34,7 @@ namespace back_end
                     logging.AddConsole();
                     logging.AddDebug();
                 })
+                .UseUrls("http://0.0.0.0:8080")
                 .UseStartup<Startup>()
                 .Build();
     }

@@ -8,7 +8,7 @@
     {
       "SingleName": "user",
       "ListName": "users",
-      "Table": "trello.Users",
+      "Table": "Users",
       "Description": "User table - contains data about user",
       "Fields": [
       {
@@ -32,7 +32,7 @@
     {
       "SingleName": "board",
       "ListName": "boards",
-      "Table": "trello.Boards",
+      "Table": "Boards",
       "Fields": [
         {
           "Name": "id",
@@ -52,7 +52,7 @@
 	{
       "SingleName": "table",
       "ListName": "tables",
-      "Table": "trello.Tables",
+      "Table": "Tables",
       "Fields": [
         {
           "Name": "id",
@@ -72,7 +72,7 @@
 	{
       "SingleName": "task",
       "ListName": "tasks",
-      "Table": "trello.Tasks",
+      "Table": "Tasks",
       "Fields": [
         {
           "Name": "id",
