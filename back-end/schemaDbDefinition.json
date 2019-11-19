@@ -1,64 +1,91 @@
 {
   "Options": {
-  "Pagination": {
-  "ArgumentNameForFirst": "limitItems"
-  }
+	"Pagination": {
+		"ArgumentNameForFirst": "limitItems"
+	}
   },
   "SchemaObjects": [
     {
-      "SingleName": "customer",
-      "ListName": "customers",
-      "Table": "Customers",
-      "Description": "Customer table - contains data about customer",
+      "SingleName": "user",
+      "ListName": "users",
+      "Table": "trello.Users",
+      "Description": "User table - contains data about user",
       "Fields": [
       {
         "Name": "id",
-        "Column": "CustomerID",
-        "DataType": "string",
-        "Description": "Unique identificator - using also to connect with orders"
+        "Column": "id",
+        "DataType": "int32",
+        "Description": "Unique identificator - using also to connect with boards"
       },
       {
-        "Name": "CompanyName",
+        "Name": "name",
+		"Column": "name",
         "DataType": "string"
       },
       {
-        "Name": "ContactName",
+        "Name": "password",
+		"Column": "password",
         "DataType": "string"
       }
-      ],
-      "RelatedObjects": [
-        {
-        "Name": "order", // refers to the name of related object
-        "Relex": "orders(CustomerID=\"id\":var)[*]" // query used to load related object
-        },
-        {
-        "Name": "orders",
-        "Relex": "orders(CustomerID=\"id\":var)[*]"
-        }
       ]
     },
     {
-      "SingleName": "order",
-      "ListName": "orders",
-      "Table": "Orders",
+      "SingleName": "board",
+      "ListName": "boards",
+      "Table": "trello.Boards",
       "Fields": [
         {
-          "Name": "orderId",
-          "Column": "OrderID",
+          "Name": "id",
+          "Column": "Boardid",
           "DataType": "int32"
         },
         {
-          "Name": "customerId",
-          "Column": "CustomerID",
+          "Name": "name",
           "DataType": "string"
         },
         {
-          "Name": "OrderDate",
-          "DataType": "datetime"
+          "Name": "owner",
+          "DataType": "int32"
+        }
+      ]
+    },
+	{
+      "SingleName": "table",
+      "ListName": "tables",
+      "Table": "trello.Tables",
+      "Fields": [
+        {
+          "Name": "id",
+          "Column": "Tableid",
+          "DataType": "int32"
         },
         {
-          "Name": "Freight",
-          "DataType": "decimal"
+          "Name": "board_id",
+          "DataType": "int32"
+        },
+        {
+          "Name": "name",
+          "DataType": "string"
+        }
+      ]
+    },
+	{
+      "SingleName": "task",
+      "ListName": "tasks",
+      "Table": "trello.Tasks",
+      "Fields": [
+        {
+          "Name": "id",
+          "Column": "Taskid",
+          "DataType": "int32"
+        },
+        {
+          "Name": "name",
+          "DataType": "String"
+        },
+        {
+          "Name": "table_id",
+          "DataType": "int32"
         }
       ]
     }

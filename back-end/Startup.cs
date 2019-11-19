@@ -45,7 +45,7 @@ namespace back_end
             {
                 var dbFactory = servicePrv.GetRequiredService<IDbFactory>();
                 var conn = dbFactory.CreateConnection();
-                conn.ConnectionString = "Server=http://192.168.99.100:3306;Database=mysql;Uid=root;Pwd=password;";//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
+                conn.ConnectionString = "Server=192.168.99.100;Port=3306;Database=mysql;Uid=root;Pwd=123;";//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
                 return conn;
             });
             services.AddScoped<DbDataAdapter>();
