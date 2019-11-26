@@ -8,10 +8,18 @@ import PageNotFound from './components/PageNotFound'
 import { Switch, Router, Route } from 'react-router-dom'
 
 import { createBrowserHistory } from "history";
+import HomePage from './components/HomePage';
 
 const customHistory = createBrowserHistory();
 
+const pathComponents = {
+  PageNotFound: () => <PageNotFound redirectPath='/' />,
+  HomePage: () => <HomePage />
+}
+
 function App() {
+
+
   return (
     <Container className='root-container' fluid='true'>
       <Router history={customHistory}>
@@ -19,10 +27,10 @@ function App() {
         <MainContainer>
           <Switch>
             <Route exact path='/' component={null} />
-            <Route exact path='/home' component={null} />
+            <Route exact path='/home' component={pathComponents.HomePage} />
             <Route exact path='/registration' component={null} />
             <Route exact path='/login' component={null} />
-            <Route component={() => <PageNotFound redirectPath='/'/>} />
+            <Route component={pathComponents.PageNotFound} />
           </Switch>
         </MainContainer>
 
