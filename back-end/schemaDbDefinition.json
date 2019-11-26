@@ -36,7 +36,7 @@
       "Fields": [
         {
           "Name": "id",
-          "Column": "Boardid",
+          "Column": "id",
           "DataType": "int32"
         },
         {
@@ -47,7 +47,17 @@
           "Name": "owner",
           "DataType": "int32"
         }
-      ]
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "user",
+            "Relex": "Users(id=\"owner\":var)[*]"
+        },
+        {
+            "Name": "users",
+            "Relex": "Users(id=\"owner\":var)[*]"
+        }
+    ]
     },
 	{
       "SingleName": "table",
@@ -56,7 +66,7 @@
       "Fields": [
         {
           "Name": "id",
-          "Column": "Tableid",
+          "Column": "id",
           "DataType": "int32"
         },
         {
@@ -67,7 +77,17 @@
           "Name": "name",
           "DataType": "string"
         }
-      ]
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "board",
+            "Relex": "Boards(id=\"board_id\":var)[*]"
+        },
+        {
+            "Name": "boards",
+            "Relex": "Boards(id=\"board_id\":var)[*]"
+        }
+    ]
     },
 	{
       "SingleName": "task",
@@ -76,7 +96,7 @@
       "Fields": [
         {
           "Name": "id",
-          "Column": "Taskid",
+          "Column": "id",
           "DataType": "int32"
         },
         {
@@ -87,7 +107,17 @@
           "Name": "table_id",
           "DataType": "int32"
         }
-      ]
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "table",
+            "Relex": "Tables(id=\"table_id\":var)[*]"
+        },
+        {
+            "Name": "tables",
+            "Relex": "Tables(id=\"table_id\":var)[*]"
+        }
+    ]
     }
   ]
 }
