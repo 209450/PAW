@@ -1,0 +1,16 @@
+.card {
+    opacity: 0.8;
+}
+
+.card:hover {
+    opacity: 1;
+}
+
+.text-on-hover {
+    opacity: 0.4;
+    height: 100%;
+}
+
+.text-on-hover:hover {
+    opacity: 1;
+}
