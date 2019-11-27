@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using back_end.Mutations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -57,7 +58,10 @@ namespace back_end
                   dbAdapter,
                   JsonConvert.DeserializeObject<GraphqlConfiguration>(
                     File.ReadAllText("schemaDbDefinition.json")//Path.Combine(ApplicationPath, "schemaDbDefinition.json"))
-                  )
+                  ), new GraphqlSchemaOption
+                  {
+                      MutationSchema = new MutationSchema(dbAdapter)
+                  }
                 ) ;
                 return graphqlAdapter;
             });
