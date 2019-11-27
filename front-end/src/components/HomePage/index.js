@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import BoardMianiature from '../BoardPage/BoardMiniature'
+import BoardMiniature from '../BoardPage/BoardMiniature'
+import { CardDeck, CardColumns } from 'react-bootstrap'
+import './HomePage.css'
+import BoardNewCard from '../BoardPage/BoardMiniature/BoardNewCard'
 
 export default class HomePage extends Component {
-    aa = () =>{
-        console.log("bbb")
-    }
+
 
     ee = () =>{
         console.log("eee")
@@ -12,9 +13,10 @@ export default class HomePage extends Component {
 
     render() {
         return (
-            <div>
-                <BoardMianiature deleteButtonOnClick={this.aa} cardOnClick={this.ee}/>
-            </div>
+            <CardColumns className="card-columns">
+                <BoardMiniature cardOnClick={this.ee}/>
+                <BoardNewCard onClick={this.ee}/>
+            </CardColumns>
         )
     }
 }
