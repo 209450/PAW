@@ -12,10 +12,10 @@ export default class BoardMiniature extends Component {
     }
 
     render() {
-        const { image, title, text, cardOnClick, deleteButtonOnClick } = this.props
+        const { image, title, text, cardOnClick} = this.props
 
         return (
-            <Card className='card' style={{ width: '18rem' }}>
+            <Card className='card ' onClick={cardOnClick} >
                 <Card.Img variant="top" src={image} />
                 <Card.ImgOverlay>
                     <Card.Title>{title}</Card.Title>
