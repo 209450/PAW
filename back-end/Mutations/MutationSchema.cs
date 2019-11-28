@@ -22,8 +22,36 @@ namespace back_end.Mutations
                     var user = context.GetArgument<User>("data");
 
                     dbAdapter.Update(
-                        new Query("users", (QField)"id" == new QConst(user.Id)),
+                        new Query("Users", (QField)"Id" == new QConst(user.Id)),
                         user
+                        );
+                    return user;
+                }
+            );
+            Field<UserType>(
+                "addUser",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "data" }),
+                resolve: context =>
+                {
+                    var user = context.GetArgument<User>("data");
+
+                    dbAdapter.Insert(
+                        "Users", user
+                        );
+                    return user;
+                }
+            );
+            Field<UserType>(
+                "deleteUser",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<UserInputType>> { Name = "data" }),
+                resolve: context =>
+                {
+                    var user = context.GetArgument<User>("data");
+
+                    dbAdapter.Delete(
+                        new Query("Users", (QField)"Id" == new QConst(user.Id))
                         );
                     return user;
                 }

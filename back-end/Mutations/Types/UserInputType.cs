@@ -11,9 +11,9 @@ namespace back_end.Mutations.Types
         public UserInputType()
         {
             Name = "UserInputType";
-            Field<NonNullGraphType<StringGraphType>>("id");
-            Field<StringGraphType>("name");
-            Field<StringGraphType>("password");
+            Field<StringGraphType>("Id");
+            Field<StringGraphType>("Name");
+            Field<StringGraphType>("Password");
         }
     }
 }

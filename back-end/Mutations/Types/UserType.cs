@@ -13,6 +13,7 @@ namespace back_end.Mutations.Types
         {
             Name = "User";
 
+            Field(h => h.Id, nullable: false).Description("User id");
             Field(h => h.Name, nullable: false).Description("User nickname");
             Field(h => h.Password, nullable: false).Description("User's password");
         }
