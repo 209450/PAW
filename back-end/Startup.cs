@@ -15,14 +15,22 @@ using NReco.GraphQL.Schemas;
 namespace back_end
 {
     public class Startup
-    {   
-
+    {
+        private readonly string allowedOrigins = "_allowedOrigins";
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc().AddNewtonsoftJson();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(allowedOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("front-end");
+                    });
+            });
             services.AddSingleton<IDbFactory, DbFactory>((servicePrv) =>
             {
                 // db-provider specific configuration code:
@@ -70,6 +78,7 @@ namespace back_end
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(allowedOrigins);
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
