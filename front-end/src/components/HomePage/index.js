@@ -4,48 +4,93 @@ import { CardDeck, CardColumns } from 'react-bootstrap'
 import './HomePage.css'
 import BoardNewCard from '../BoardPage/BoardMiniature/BoardNewCard'
 import NewBoardModal from '../BoardPage/NewBoardModal'
+import { Link, useRouteMatch, Redirect } from 'react-router-dom'
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
 export default class HomePage extends Component {
 
-    componentDidMount(){
-
+    static defaultProps = {
+        boardList: ["aa"]
     }
 
     state = {
-        newBoardModalShowState: true
+        newBoardModalShowState: false,
+        boardList: this.props.boardList,
+        redirectToBoard: null
     }
 
-    hideNewBoardModal(){
-        this.setState({newBoardModalShowState: false})
+    componentDidMount() {
+        
+        
+
     }
 
-    showNewBoardModal(){
-        this.setState({newBoardModalShowState: true})
+    
+    hideNewBoardModal() {
+        this.setState({ newBoardModalShowState: false })
+    }
+
+    showNewBoardModal() {
+        this.setState({ newBoardModalShowState: true })
     }
 
     openNewBoardModal = () => {
         this.showNewBoardModal()
     }
 
-    onHideNewBoardModal = () =>{
+    onHideNewBoardModal = () => {
         this.hideNewBoardModal()
     }
 
-    createNewBoard = (title, description) =>{
-        
+    cardOnClick = (event) => {
+        this.setState({ redirectToBoard: <Redirect to={`/home/id`} /> })
     }
-    
+
 
     render() {
-        let {newBoardModalShowState} = this.state
+        let { newBoardModalShowState } = this.state
 
         return (
+            <div>
+                <CardColumns className="card-columns">
+                    {this.state.boardList.map((board) => <BoardMiniature cardOnClick={this.cardOnClick.bind(board)} />)}
+                    <BoardNewCard onClick={this.openNewBoardModal} />
+                    <NewBoardModal show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
+                </CardColumns>
+                {this.state.redirectToBoard}
 
-            <CardColumns className="card-columns">
-                <BoardMiniature cardOnClick={this.ee}/>
-                <BoardNewCard onClick={this.openNewBoardModal}/>
-                <NewBoardModal show={this.state.newBoardModalShowState} onHide={this.onHideNewBoardModal}/>
-            </CardColumns>
+                <Dogs />
+            </div>
         )
     }
+}
+
+const USERS = gql`
+        {
+            users {
+              id
+              name
+              password
+            }
+          }
+        `;
+
+function Dogs({ onDogSelected}) {
+    const { loading, error, data } = useQuery(USERS);
+
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    console.log(data)
+
+    return (
+        <select name="dog" onChange={onDogSelected}>
+            {data.dogs.map(dog => (
+                <option key={dog.id} value={dog.breed}>
+                    {dog.breed}
+                </option>
+            ))}
+        </select>
+    );
 }

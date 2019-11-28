@@ -4,7 +4,7 @@ export default class BoardPage extends Component {
     render() {
         return (
             <div>
-                hhh
+                Board
             </div>
         )
     }
