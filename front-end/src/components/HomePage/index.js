@@ -22,12 +22,12 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        
-        
+
+
 
     }
 
-    
+
     hideNewBoardModal() {
         this.setState({ newBoardModalShowState: false })
     }
@@ -61,36 +61,8 @@ export default class HomePage extends Component {
                 </CardColumns>
                 {this.state.redirectToBoard}
 
-                <Dogs />
             </div>
         )
     }
 }
 
-const USERS = gql`
-        {
-            users {
-              id
-              name
-              password
-            }
-          }
-        `;
-
-function Dogs({ onDogSelected}) {
-    const { loading, error, data } = useQuery(USERS);
-
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
-    console.log(data)
-
-    return (
-        <select name="dog" onChange={onDogSelected}>
-            {data.dogs.map(dog => (
-                <option key={dog.id} value={dog.breed}>
-                    {dog.breed}
-                </option>
-            ))}
-        </select>
-    );
-}
