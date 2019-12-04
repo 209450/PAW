@@ -57,7 +57,7 @@ export default class HomePage extends Component {
                 <CardColumns className="card-columns">
                     {this.state.boardList.map((board) => <BoardMiniature cardOnClick={this.cardOnClick.bind(board)} />)}
                     <BoardNewCard onClick={this.openNewBoardModal} />
-                    <NewBoardModal show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
+                    <NewBoardModal postURL="" show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
                 </CardColumns>
                 {this.state.redirectToBoard}
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 
 export default class NewBoardModal extends Component {
 
     render() {
         let { show } = this.props
-        const { onHide } = this.props
+        const { onHide, postURL } = this.props
 
         return (
             <Modal show={show} onHide={onHide}>
@@ -13,16 +13,14 @@ export default class NewBoardModal extends Component {
                     <Modal.Title>New Board</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Woohoo, you're reading this text in a modal!
+                    <Form action={postURL} method="POST">
+                        <Form.Group>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" placeholder="Enter title" required/>
+                        </Form.Group>
+                        <Button variant="primary" type="submit" >Submit</Button>
+                    </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={onHide}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={onHide}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
             </Modal>
         )
     }
