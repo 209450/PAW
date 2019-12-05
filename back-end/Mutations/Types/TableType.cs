@@ -11,7 +11,7 @@ namespace back_end.Mutations.Types
     {
         public TableType()
         {
-            Name = "Board";
+            Name = "Table";
 
             Field(h => h.Id, nullable: false).Description("Table id");
             Field(h => h.Name, nullable: false).Description("Table name");

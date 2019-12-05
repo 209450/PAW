@@ -12,7 +12,7 @@ namespace back_end.Mutations.Types
     {
         public TaskType()
         {
-            Name = "Board";
+            Name = "Task";
 
             Field(h => h.Id, nullable: false).Description("Task id");
             Field(h => h.Name, nullable: false).Description("Task name");

@@ -129,7 +129,7 @@ namespace back_end.Mutations
                     return table;
                 }
             );
-            Field<UserType>(
+            Field<TableType>(
                 "deleteTable",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<TableInputType>> { Name = "data" }),
