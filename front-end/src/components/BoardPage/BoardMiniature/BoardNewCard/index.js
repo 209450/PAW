@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import './BoardNewCard.css'
-import image from './placeholders/boardminiature.svg'
+import image from '../../../../assets/placeholders/boardminiature.svg'
 
 export default class BoardNewCard extends Component {
     render() {
