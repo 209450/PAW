@@ -21,7 +21,7 @@ namespace Controllers
             _graphqlAdapter = graphqlAdapter;
         }
 
-        [HttpGet/*("{query}")*/]
+        [HttpGet]
         public async Task<IActionResult> GetAsync(string query, CancellationToken cancellationToken)
         {
             var graphqlResult = await _graphqlAdapter.ExecuteToJsonAsync(query, cancellationToken);

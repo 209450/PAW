@@ -27,7 +27,13 @@
 		"Column": "password",
         "DataType": "string"
       }
-      ]
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "boards",
+            "Relex": "Boards(owner=\"id\":var)[*]"
+        }
+    ]
     },
     {
       "SingleName": "board",
@@ -54,8 +60,8 @@
             "Relex": "Users(id=\"owner\":var)[*]"
         },
         {
-            "Name": "users",
-            "Relex": "Users(id=\"owner\":var)[*]"
+            "Name": "tables",
+            "Relex": "Tables(board_id=\"id\":var)[*]"
         }
     ]
     },
@@ -84,8 +90,8 @@
             "Relex": "Boards(id=\"board_id\":var)[*]"
         },
         {
-            "Name": "boards",
-            "Relex": "Boards(id=\"board_id\":var)[*]"
+            "Name": "tasks",
+            "Relex": "Tasks(table_id=\"id\":var)[*]"
         }
     ]
     },

@@ -4,8 +4,10 @@
     <RootNamespace>back_end</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GraphQL" Version="2.4.0" />
-    <PackageReference Include="MySql.Data" Version="8.0.18" />
-    <PackageReference Include="NReco.GraphQL" Version="1.0.4" />
+    <PackageReference Include="GraphQL" Version="2.4.0"/>
+    <PackageReference Include="MySql.Data" Version="8.0.18"/>
+    <PackageReference Include="NReco.GraphQL" Version="1.0.4"/>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0"/>
   </ItemGroup>
 </Project>
