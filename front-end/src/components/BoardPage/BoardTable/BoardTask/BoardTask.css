@@ -1,0 +1,9 @@
+.task-container{
+    border-color: lightgrey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;  
+    background-color: red; 
+
+    margin: 1% 10% 1% 10%;
+}
