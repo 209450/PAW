@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
+import BaseModal from '../../BaseModal'
 
 export default class NewBoardModal extends Component {
 
@@ -8,11 +9,7 @@ export default class NewBoardModal extends Component {
         const { onHide, postURL } = this.props
 
         return (
-            <Modal show={show} onHide={onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>New Board</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                <BaseModal show={show} onHide={onHide} title="New Board">
                     <Form action={postURL} method="POST">
                         <Form.Group>
                             <Form.Label>Title</Form.Label>
@@ -20,8 +17,7 @@ export default class NewBoardModal extends Component {
                         </Form.Group>
                         <Button variant="primary" type="submit" >Submit</Button>
                     </Form>
-                </Modal.Body>
-            </Modal>
+                </BaseModal>
         )
     }
 }
