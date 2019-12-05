@@ -72,7 +72,7 @@ namespace back_end.Mutations
                     return board;
                 }
             );
-            Field<UserType>(
+            Field<BoardType>(
                 "addBoard",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<BoardInputType>> { Name = "data" }),
@@ -86,7 +86,7 @@ namespace back_end.Mutations
                     return board;
                 }
             );
-            Field<UserType>(
+            Field<BoardType>(
                 "deleteBoard",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<BoardInputType>> { Name = "data" }),
