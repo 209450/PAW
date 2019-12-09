@@ -41,11 +41,7 @@ export default class BoardMiniature extends Component {
 
         return (
             <Card className='card' onClick={cardOnClick} >
-                <CardHeaderWithIcon title={title} icon={
-                    <Button variant="outline-secondary" onClick={this.iconClicked}>
-                        <EditIcon  />
-                    </Button>
-                } />
+                <Card.Header>{title}</Card.Header>
                 <Card.Img variant="top" src={image} />
                 <BoardMianiatureEditModal show={editModalShow} onHide={this.hideModal} postURL={"/"} />
             </Card>

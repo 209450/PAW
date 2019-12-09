@@ -23,8 +23,6 @@ export default class HomePage extends Component {
 
     componentDidMount() {
 
-
-
     }
 
 
