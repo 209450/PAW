@@ -60,9 +60,34 @@ export default class HomePage extends Component {
                     <NewBoardModal postURL="" show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
                 </CardColumns>
                 {this.state.redirectToBoard}
-
+                <ExchangeRates />
             </div>
         )
     }
 }
 
+
+const EXCHANGE_RATES = gql`
+{
+    users {
+      id
+      name
+      password
+    }
+  }
+`;
+
+function ExchangeRates() {
+    const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+
+    return data.users.map(({ id, name, password }) => (
+        <div key={id}>
+            <p>
+                {id}: {name} : {password} 
+            </p>
+        </div>
+    ));
+}
