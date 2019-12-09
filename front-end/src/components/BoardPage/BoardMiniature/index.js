@@ -4,27 +4,50 @@ import { Card, Button, OverlayTrigger, Row, Col } from 'react-bootstrap'
 import imagePlaceHolder from '../../../assets/placeholders/boardminiature.svg'
 import EditIcon from '../../../assets/icons/EditIcon'
 import CardHeaderWithIcon from '../../CardHeaderWithIcon'
+import BoardMianiatureEditModal from './BoardMianiatureEditModal'
 
 export default class BoardMiniature extends Component {
 
     static defaultProps = {
         image: imagePlaceHolder,
         title: "Board",
-        text: "Description"
+        text: "Description",
+
     }
 
-    ee = (e) => {
-        e.stopPropagation()
+    state = {
+        editModalShow: false
+    }
+
+    showModal = () => {
+        this.setState({ editModalShow: true })
+    }
+
+    hideModal = () => {
+        this.setState({ editModalShow: false })
+    }
+
+    iconClicked = (event) => {
+        event.stopPropagation()
+        this.showModal()
     }
 
 
     render() {
         const { image, title, text, cardOnClick } = this.props
 
+        let { editModalShow } = this.state
+
+
         return (
             <Card className='card' onClick={cardOnClick} >
-                <CardHeaderWithIcon title={title} icon={<EditIcon />} />
+                <CardHeaderWithIcon title={title} icon={
+                    <Button variant="outline-secondary" onClick={this.iconClicked}>
+                        <EditIcon  />
+                    </Button>
+                } />
                 <Card.Img variant="top" src={image} />
+                <BoardMianiatureEditModal show={editModalShow} onHide={this.hideModal} postURL={"/"} />
             </Card>
 
         )

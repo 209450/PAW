@@ -5,8 +5,7 @@ import BaseModal from '../../BaseModal'
 export default class NewBoardModal extends Component {
 
     render() {
-        let { show } = this.props
-        const { onHide, postURL } = this.props
+        const { onHide, show, postURL } = this.props
 
         return (
                 <BaseModal show={show} onHide={onHide} title="New Board">
