@@ -8,6 +8,7 @@ import { Link, useRouteMatch, Redirect } from 'react-router-dom'
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { Query } from "react-apollo";
 
 export default class HomePage extends Component {
 
@@ -81,12 +82,15 @@ function ExchangeRates() {
     const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (error){
+        console.log(error.networkError)
+        return <p>Error :(</p>;
+    } 
 
     return data.users.map(({ id, name, password }) => (
         <div key={id}>
             <p>
-                {id}: {name} : {password} 
+                {id}: {name} : {password}
             </p>
         </div>
     ));
