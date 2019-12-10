@@ -23,6 +23,9 @@ const pathComponents = {
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/api/graphql/',
+  fetchOptions: {
+    mode: 'no-cors',
+  },
 });
 
 function App() {
