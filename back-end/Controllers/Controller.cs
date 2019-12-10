@@ -8,17 +8,39 @@ using Newtonsoft.Json.Linq;
 using NReco.GraphQL;
 using System.Net.Http;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using back_end.Models;
+using back_end.Services;
+using System.Linq;
 
 namespace Controllers
 {
+    [Authorize]
+    [ApiController]
     [Route("api/graphql")]
     public class GraphqlController : Controller
     {
         private IGraphqlAdapter _graphqlAdapter;
+        private IUserService _userService;
 
-        public GraphqlController(IGraphqlAdapter graphqlAdapter)
+        public GraphqlController(IGraphqlAdapter graphqlAdapter, IUserService userService)
         {
             _graphqlAdapter = graphqlAdapter;
+            _userService = userService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Invalid Model" });
+            var user = _userService.Authenticate(model.Username, model.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(user);
         }
 
         [HttpGet]

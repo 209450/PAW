@@ -1,11 +1,16 @@
+using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Text;
 using back_end.Mutations;
+using back_end.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NReco.Data;
 using NReco.GraphQL;
@@ -32,6 +37,23 @@ namespace back_end
                         builder.WithOrigins("front-end");
                     });
             });
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("jestemPl4ckiem")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             services.AddSingleton<IDbFactory, DbFactory>((servicePrv) =>
             {
                 // db-provider specific configuration code:
@@ -55,6 +77,7 @@ namespace back_end
                 return conn;
             });
             services.AddScoped<DbDataAdapter>();
+            services.AddScoped<IUserService, UserService>();
             // configure schema via json-file
             services.AddScoped<IGraphqlAdapter>((servicePrv) =>
             {
