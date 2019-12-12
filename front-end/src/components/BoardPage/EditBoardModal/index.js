@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
 import BaseModal from '../../BaseModal'
+import { Form, Button } from 'react-bootstrap'
 
-export default class NewBoardModal extends Component {
-
+export default class EditBoardModal extends Component {
     render() {
-        const { onHide, show, postURL } = this.props
+        const {show, onHide, postURL } = this.props
 
         return (
-                <BaseModal show={show} onHide={onHide} title="New Board">
-                    <Form action={postURL} method="POST">
+            <BaseModal show={show} onHide={onHide} title={"Edit Board"}>
+                <Form action={postURL} method="POST">
                         <Form.Group>
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" placeholder="Enter title" required/>
                         </Form.Group>
                         <Button variant="primary" type="submit" >Submit</Button>
                     </Form>
-                </BaseModal>
+            </BaseModal>
         )
     }
 }
