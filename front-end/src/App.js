@@ -12,6 +12,8 @@ import HomePage from './components/HomePage';
 import BoardPage from './components/BoardPage';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 
 const customHistory = createBrowserHistory();
 
@@ -21,9 +23,22 @@ const pathComponents = {
   BoardPage: () => <BoardPage />
 }
 
+const requestSettings = (operation) => {
+  // const token = localStorage.getItem()
+  operation.setContext(
+    {
+      headers: {
+        'content-type': 'application/json',
+      }
+    }
+  )
+
+}
+
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/api/graphql/',
-});
+  uri: 'api/graphql/',
+  request: requestSettings,
+})
 
 function App() {
   const { PageNotFound, HomePage, BoardPage } = pathComponents
