@@ -55,7 +55,7 @@ namespace back_end
             {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
-                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret)),
@@ -82,7 +82,7 @@ namespace back_end
             {
                 var dbFactory = servicePrv.GetRequiredService<IDbFactory>();
                 var conn = dbFactory.CreateConnection();
-                conn.ConnectionString = "Server=database;Port=3306;Database=trello;Uid=root;Pwd=123;";//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
+                conn.ConnectionString = string.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", _appSettings.Server, _appSettings.Port, _appSettings.Database, _appSettings.Uid, _appSettings.Pwd);//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
                 return conn;
             });
             services.AddScoped<DbDataAdapter>();

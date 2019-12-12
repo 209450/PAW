@@ -16,7 +16,6 @@ using System.Linq;
 namespace Controllers
 {
     [Authorize]
-    [ApiController]
     [Route("api/graphql")]
     public class GraphqlController : Controller
     {
