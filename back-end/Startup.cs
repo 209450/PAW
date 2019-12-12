@@ -2,6 +2,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Text;
+using back_end.Helpers;
 using back_end.Mutations;
 using back_end.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NReco.Data;
@@ -22,6 +24,13 @@ namespace back_end
     public class Startup
     {
         private readonly string allowedOrigins = "_allowedOrigins";
+        private readonly AppSettings _appSettings;
+
+
+        public Startup(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -49,7 +58,7 @@ namespace back_end
                 x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("jestemPl4ckiem")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

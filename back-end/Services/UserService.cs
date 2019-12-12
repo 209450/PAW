@@ -41,7 +41,7 @@ namespace back_end.Services
                 return null;
             // uwierzytelnication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("Ni3-Wi3M_J4K_T3N-Kl00cZ_M4_VVyGl0ND4C-Pr053-MnI3-Z05T4VVIC");//_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             User user = new User();
             user.Id = result["id"].ToString();
             user.Name = result["name"].ToString();
