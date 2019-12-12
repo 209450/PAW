@@ -14,7 +14,6 @@ namespace back_end.Services
     public interface IUserService
     {
         User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
     }
 
     public class UserService : IUserService
@@ -59,11 +58,6 @@ namespace back_end.Services
             user.Token = tokenHandler.WriteToken(token);
 
             return user.WithoutPassword();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return null;
         }
     }
 }
