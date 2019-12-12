@@ -8,6 +8,7 @@ import { Link, useRouteMatch, Redirect } from 'react-router-dom'
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { Query } from "react-apollo";
 
 export default class HomePage extends Component {
 
@@ -58,7 +59,6 @@ export default class HomePage extends Component {
                     <NewBoardModal postURL="" show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
                 </CardColumns>
                 {this.state.redirectToBoard}
-
             </div>
         )
     }
