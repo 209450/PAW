@@ -120,7 +120,7 @@ namespace back_end
             app.UseCors(allowedOrigins);
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseMiddleware<GraphQlMiddleware>(settings);
+            //app.UseMiddleware<GraphQLMiddleware>(settings);
             app.UseAuthorization();
 
             
