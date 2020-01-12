@@ -1,5 +1,6 @@
 ﻿using back_end.Mutations.Types;
 using GraphQL.Types;
+using GraphQL.Authorization;
 using Mutations.Tables;
 using NReco.Data;
 using System;
@@ -10,6 +11,7 @@ using Task = Mutations.Tables.Task;
 
 namespace back_end.Mutations
 {
+    [GraphQLAuthorize(Policy = "UserPolicy")]
     public class MutationSchema : ObjectGraphType
     {
         public MutationSchema(DbDataAdapter dbAdapter)

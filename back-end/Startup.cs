@@ -1,8 +1,15 @@
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
+using back_end.AuthHelpers;
 using back_end.Mutations;
+using GraphQl.AspNetCore;
+using GraphQL.Authorization;
+using GraphQL.Http;
+using GraphQL.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -70,11 +77,42 @@ namespace back_end
                 ) ;
                 return graphqlAdapter;
             });
+
+            //AUTH
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IAuthorizationEvaluator, AuthorizationEvaluator>();
+            services.AddTransient<IValidationRule, AuthorizationValidationRule>();
+
+            services.AddSingleton(s =>
+            {
+                var authSetting = new AuthorizationSettings();
+                authSetting.AddPolicy("UserPolicy", _ => _.RequireClaim("role", "User"));
+                return authSetting;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var settings = new GraphQLSetting
+            {
+                BuildUserContext = ctx =>
+                {
+                    var userContext = new GraphQLUserContext
+                    {
+                        User = ctx.User
+                    };
+
+                    return Task.FromResult(userContext);
+                }
+            };
+            
+            var rules = app.ApplicationServices.GetServices<IValidationRule>();
+            settings.ValidationRules.AddRange(rules);
+
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -82,7 +120,11 @@ namespace back_end
             app.UseCors(allowedOrigins);
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseMiddleware<GraphQlMiddleware>(settings);
             app.UseAuthorization();
+
+            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
