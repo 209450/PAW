@@ -56,7 +56,8 @@ namespace Controllers
             HttpContext.Request.Headers.TryGetValue("Bearer", out var token);
             var jwtToken = new JwtSecurityToken(token);
             var claims = jwtToken.Claims.Where(c => c.Type.ToString() == "unique_name").Select(c => c.Value).SingleOrDefault();
-            Console.WriteLine(claims);
+            if (claims != getUserName(query))
+                return StatusCode(403, "Odmowa dostepu");
 
             //var lexer = new Lexer();
             //var queryUserName = lexer.Lex(new Source(query)).GetPropertyValue("user").GetValue();
@@ -78,12 +79,12 @@ namespace Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]GraphQLRequest queryRequest, CancellationToken cancellationToken)
         {
-            String accessToken = Request.Headers["Authorization"];
-            if (accessToken == String.Empty) return BadRequest();
-            //var accessToken = Request.Headers["Authorization"];
-            //Console.WriteLine(accessToken.ToString());
-            var username = User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
-            Console.WriteLine("U¯YSZKODNIK: " + username.ToString());
+            HttpContext.Request.Headers.TryGetValue("Bearer", out var token);
+            var jwtToken = new JwtSecurityToken(token);
+            var claims = jwtToken.Claims.Where(c => c.Type.ToString() == "unique_name").Select(c => c.Value).SingleOrDefault();
+            if (claims != getUserName(queryRequest.Query))
+                return StatusCode(403, "Odmowa dostepu");
+            
             var graphqlResult = await _graphqlAdapter.ExecuteToJsonAsync(
                 new GraphQLQuery
                 {
@@ -94,6 +95,22 @@ namespace Controllers
                 cancellationToken
             );
             return Ok(graphqlResult);
+        }
+
+        private String getUserName(string query)
+        {
+            int Start, End;
+            if (query.Contains("user") && query.Contains("name:") && query.Contains(")"))
+            {
+                Start = query.IndexOf("name:", 0) + "name:".Length;
+                End = query.IndexOf(")", Start);
+                String result = query.Substring(Start, End - Start);
+                return result.Trim().Trim('"');
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 
