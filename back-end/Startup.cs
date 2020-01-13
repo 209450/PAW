@@ -58,7 +58,7 @@ namespace back_end
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Ni3-Wi3M_J4K_T3N-Kl00cZ_M4_VVyGl0ND4C-Pr053-MnI3-Z05T4VVIC")),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -82,7 +82,7 @@ namespace back_end
             {
                 var dbFactory = servicePrv.GetRequiredService<IDbFactory>();
                 var conn = dbFactory.CreateConnection();
-                conn.ConnectionString = string.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", _appSettings.Server, _appSettings.Port, _appSettings.Database, _appSettings.Uid, _appSettings.Pwd);//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
+                conn.ConnectionString = string.Format("Server=database;Port=3306;Database=trello;Uid=root;Pwd=123;", _appSettings.Server, _appSettings.Port, _appSettings.Database, _appSettings.Uid, _appSettings.Pwd);//String.Format("Filename={0}", Path.Combine(ApplicationPath, "../Data/northwind.db"));
                 return conn;
             });
             services.AddScoped<DbDataAdapter>();
@@ -111,10 +111,11 @@ namespace back_end
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(allowedOrigins);
             app.UseHttpsRedirection();
-            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRouting();
+            app.UseCors(allowedOrigins);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
