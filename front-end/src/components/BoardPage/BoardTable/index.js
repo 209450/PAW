@@ -4,6 +4,8 @@ import BoardTask from './BoardTask'
 import './Table.css'
 import EditIcon from '../../../assets/icons/EditIcon'
 import BoardEditModal from '../BoardEditModal'
+import EditButton from '../../EditButton'
+import './Table.css'
 
 export default class BoardTable extends Component {
 
@@ -34,7 +36,7 @@ export default class BoardTable extends Component {
         const { showEditModal} = this.state
 
         return (
-            <Card >
+            <Card className="board-table">
                 <Card.Header>
                     {name}
                 </Card.Header>
@@ -46,9 +48,7 @@ export default class BoardTable extends Component {
                     </div>
                 )}
                 <Card.Footer>
-                    <Button variant="outline-light" onClick={this.editButtonCallback}>
-                        <EditIcon />
-                    </Button>
+                    <EditButton onClick={this.editButtonCallback}/>
                 </Card.Footer>
                 <BoardEditModal postURL="" show={showEditModal} onHide={this.hideEditModal} />
             </Card>

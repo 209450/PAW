@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Button } from 'react-bootstrap'
+import { Navbar, Nav, Button, Container } from 'react-bootstrap'
 import './BoardNavBar.css'
 import EditIcon from '../../../assets/icons/EditIcon'
 

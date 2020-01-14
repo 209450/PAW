@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BaseModal from '../../../BaseModal'
+import BaseModal from '../../../Abstracts/BaseModal'
 import { Form, Button } from 'react-bootstrap'
 
 export default class BoardMianiatureEditModal extends Component {

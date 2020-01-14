@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import BoardTable from './BoardTable'
-import { CardColumns, CardDeck } from 'react-bootstrap'
+import { CardColumns, CardDeck, Container, Modal } from 'react-bootstrap'
 import BoardNavBar from './BoardNavBar'
 import EditBoardModal from './EditBoardModal'
+import EditTaskDropdown from './BoardTable/EditTaskDropdown'
+import './BoardPage.css'
 
 export default class BoardPage extends Component {
 
@@ -13,7 +15,8 @@ export default class BoardPage extends Component {
 
     state = {
         tableList: this.props.tableList,
-        showEditModal: this.props.showEditModal
+        showEditModal: this.props.showEditModal,
+        editTaskWidth: 0
     }
 
     showEditModal = () =>{
@@ -28,19 +31,17 @@ export default class BoardPage extends Component {
         this.showEditModal()
     }
 
-
-
     render() {
-        const {showEditModal} = this.state
+        const {showEditModal, editTaskWidth} = this.state
 
         return (
-            <div>
+            <Container className="board-page" fluid>
                 <BoardNavBar editButtonCallback={this.editButtonCallback}/>
-                <CardDeck className="card-columns">
+                <CardDeck className="card-columns flex-row flex-nowrap">
                     {this.state.tableList.map((table) => <BoardTable />)}
                 </CardDeck>
                 <EditBoardModal postURL="" show={showEditModal} onHide={this.hideEditModal}/>
-            </div>
+            </Container>
         )
     }
 }
