@@ -13,12 +13,13 @@ import Login from './components/Login/App';
 const customHistory = createBrowserHistory();
 
 const pathFormsComponents = {
-  LoginForm: () => <Login postURL={'/login'}/>,
+  LoginForm: () => <Login headerText="Sing In" postURL={'/login'} />,
+  RegistrationForm: () => <Login headerText="Register" postURL={'/registration'}/>
 }
 
 
 function App() {
-  const {LoginForm} = pathFormsComponents
+  const { LoginForm, RegistrationForm } = pathFormsComponents
   return (
     <Container className='root-container' fluid='true'>
       <Router history={customHistory}>
@@ -27,9 +28,9 @@ function App() {
           <Switch>
             <Route exact path='/' component={null} />
             <Route exact path='/home' component={null} />
-            <Route exact path='/registration' component={null} />
+            <Route exact path='/registration' component={RegistrationForm} />
             <Route exact path='/login' component={LoginForm} />
-            <Route component={() => <PageNotFound redirectPath='/'/>} />
+            <Route component={() => <PageNotFound redirectPath='/' />} />
           </Switch>
         </MainContainer>
 
