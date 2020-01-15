@@ -41,6 +41,7 @@ export default class BoardTask extends Component {
                         <EditButton onClick={this.editButtonCallback}/>
                     </ListGroup.Item>
                 </ListGroup>
+                
                 <EditTaskModal postURL="" show={showModal} onHide={this.hideEditModal}/>
             </Container>
         )
