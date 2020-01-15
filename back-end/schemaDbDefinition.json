@@ -1,0 +1,129 @@
+{
+  "Options": {
+	"Pagination": {
+		"ArgumentNameForFirst": "limitItems"
+	}
+  },
+  "SchemaObjects": [
+    {
+      "SingleName": "user",
+      "ListName": "users",
+      "Table": "Users",
+      "Description": "User table - contains data about user",
+      "Fields": [
+      {
+        "Name": "id",
+        "Column": "id",
+        "DataType": "int32",
+        "Description": "Unique identificator - using also to connect with boards"
+      },
+      {
+        "Name": "name",
+		"Column": "name",
+        "DataType": "string"
+      },
+      {
+        "Name": "password",
+		"Column": "password",
+        "DataType": "string"
+      }
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "boards",
+            "Relex": "Boards(owner=\"id\":var)[*]"
+        }
+    ]
+    },
+    {
+      "SingleName": "board",
+      "ListName": "boards",
+      "Table": "Boards",
+      "Fields": [
+        {
+          "Name": "id",
+          "Column": "id",
+          "DataType": "int32"
+        },
+        {
+          "Name": "name",
+          "DataType": "string"
+        },
+        {
+          "Name": "owner",
+          "DataType": "int32"
+        }
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "user",
+            "Relex": "Users(id=\"owner\":var)[*]"
+        },
+        {
+            "Name": "tables",
+            "Relex": "Tables(board_id=\"id\":var)[*]"
+        }
+    ]
+    },
+	{
+      "SingleName": "table",
+      "ListName": "tables",
+      "Table": "Tables",
+      "Fields": [
+        {
+          "Name": "id",
+          "Column": "id",
+          "DataType": "int32"
+        },
+        {
+          "Name": "board_id",
+          "DataType": "int32"
+        },
+        {
+          "Name": "name",
+          "DataType": "string"
+        }
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "board",
+            "Relex": "Boards(id=\"board_id\":var)[*]"
+        },
+        {
+            "Name": "tasks",
+            "Relex": "Tasks(table_id=\"id\":var)[*]"
+        }
+    ]
+    },
+	{
+      "SingleName": "task",
+      "ListName": "tasks",
+      "Table": "Tasks",
+      "Fields": [
+        {
+          "Name": "id",
+          "Column": "id",
+          "DataType": "int32"
+        },
+        {
+          "Name": "name",
+          "DataType": "String"
+        },
+        {
+          "Name": "table_id",
+          "DataType": "int32"
+        }
+      ],
+      "RelatedObjects": [
+        {
+            "Name": "table",
+            "Relex": "Tables(id=\"table_id\":var)[*]"
+        },
+        {
+            "Name": "tables",
+            "Relex": "Tables(id=\"table_id\":var)[*]"
+        }
+    ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+.board-nav-bar{
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow-x: auto;
+    position: sticky !important;
+}
