@@ -23,6 +23,8 @@ services:
        - frontend-network
      ports:
        - "3001:3000"
+    #  environment:
+    #    - API_URL: back-end:8080
    back-end:
      build:
         context: back-end
