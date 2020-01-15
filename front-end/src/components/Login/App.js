@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel, Form } from "react-bootstrap";
 import "./Login.css";
 
-export default function Login(props) {
+export default function Login({postURL,...props}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,12 +16,12 @@ export default function Login(props) {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      <h2 id="title">Sign In</h2>
+      <Form action={postURL} method="post" >
         <FormGroup controlId="email" bsSize="large">
-          <FormLabel>Email</FormLabel>
+          <FormLabel>Username </FormLabel>
           <FormControl
             autoFocus
-            type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
@@ -34,10 +34,10 @@ export default function Login(props) {
             type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+        <Button block bsSize="large"  type="submit">
           Login
         </Button>
-      </form>
+      </Form>
     </div>
   );
 }

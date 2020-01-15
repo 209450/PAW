@@ -8,10 +8,17 @@ import PageNotFound from './components/PageNotFound'
 import { Switch, Router, Route } from 'react-router-dom'
 
 import { createBrowserHistory } from "history";
+import Login from './components/Login/App';
 
 const customHistory = createBrowserHistory();
 
+const pathFormsComponents = {
+  LoginForm: () => <Login postURL={'/login'}/>,
+}
+
+
 function App() {
+  const {LoginForm} = pathFormsComponents
   return (
     <Container className='root-container' fluid='true'>
       <Router history={customHistory}>
@@ -21,7 +28,7 @@ function App() {
             <Route exact path='/' component={null} />
             <Route exact path='/home' component={null} />
             <Route exact path='/registration' component={null} />
-            <Route exact path='/login' component={null} />
+            <Route exact path='/login' component={LoginForm} />
             <Route component={() => <PageNotFound redirectPath='/'/>} />
           </Switch>
         </MainContainer>
