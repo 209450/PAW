@@ -59,17 +59,6 @@ namespace Controllers
             if (claims != getUserName(query))
                 return StatusCode(403, "Odmowa dostepu");
 
-            //var lexer = new Lexer();
-            //var queryUserName = lexer.Lex(new Source(query)).GetPropertyValue("user").GetValue();
-
-            //JObject temp = JObject.Parse(query);
-            //Console.WriteLine("elo bulwy: " + temp["user"]["name"]);
-            //Console.WriteLine("Kuery: " + query); //GRAPHQL DOTNET PARSER
-            /*var executor = new DocumentExecuter();
-            var result = await executor.ExecuteAsync(new ExecutionOptions{
-                Query = query,
-                ValidationRules = DocumentValidator.CoreRules().Concat(new[] { new QueryChecker() })
-            });*/
             
             var graphqlResult = await _graphqlAdapter.ExecuteToJsonAsync(query, cancellationToken);
 
