@@ -1,0 +1,9 @@
+.board-table{
+    min-width: 200px;
+    
+}
+
+.new-task-button{
+    width: 100%;
+    padding: 0 5px 0 5px;
+}

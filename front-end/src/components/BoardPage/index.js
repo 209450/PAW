@@ -1,19 +1,35 @@
 import React, { Component } from 'react'
 import BoardTable from './BoardTable'
-import { CardColumns, CardDeck } from 'react-bootstrap'
+import { CardColumns, CardDeck, Container, Modal, Button } from 'react-bootstrap'
 import BoardNavBar from './BoardNavBar'
 import EditBoardModal from './EditBoardModal'
+import EditTaskDropdown from './BoardTable/EditTaskDropdown'
+import './BoardPage.css'
+import AddNewBoardModal from './AddNewBoardModal'
 
 export default class BoardPage extends Component {
 
     static defaultProps = {
         tableList: ["aa", 3, 5, 6, 3, 6],
-        showEditModal: false
     }
 
     state = {
         tableList: this.props.tableList,
-        showEditModal: this.props.showEditModal
+        showEditModal: false,
+        showAddNewTaskModal: false,
+        editTaskWidth: 0
+    }
+
+    showAddNewTableModal = ()=>{
+        this.setState({showAddNewTaskModal: true})
+    }
+
+    hideAddNewTableModal = ()=>{
+        this.setState({showAddNewTaskModal: false})
+    }
+
+    addNewTableCallback = ()=>{
+        this.showAddNewTableModal()
     }
 
     showEditModal = () =>{
@@ -28,19 +44,19 @@ export default class BoardPage extends Component {
         this.showEditModal()
     }
 
-
-
     render() {
-        const {showEditModal} = this.state
+        const {showEditModal, editTaskWidth, showAddNewTaskModal} = this.state
 
         return (
-            <div>
-                <BoardNavBar editButtonCallback={this.editButtonCallback}/>
-                <CardDeck className="card-columns">
+            <Container className="board-page" fluid>
+                <BoardNavBar editButtonCallback={this.editButtonCallback} newTableCallback={this.addNewTableCallback}/>
+                <CardDeck className="card-columns flex-row flex-nowrap">
                     {this.state.tableList.map((table) => <BoardTable />)}
                 </CardDeck>
+                
                 <EditBoardModal postURL="" show={showEditModal} onHide={this.hideEditModal}/>
-            </div>
+                <AddNewBoardModal postURL="" show={showAddNewTaskModal} onHide={this.hideAddNewTableModal}/>
+            </Container>
         )
     }
 }
