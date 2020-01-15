@@ -6,15 +6,11 @@ import CollapseNavBarMenu from './CollapseNavBarMenu'
 import '../../App.css'
 
 class MainNavBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isLogged: true
-        }
+    state = {
+        isLogged: false
     }
 
     componentDidMount() {
-        this.setState({ isLogged: true })
     }
 
     logged = () => {
@@ -28,12 +24,8 @@ class MainNavBar extends Component {
     unLogged = () => {
         return (
             <Nav>
-                <Nav.Item>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="/register">Register</Nav.Link>
-                </Nav.Item>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
             </Nav>
         )
     }
