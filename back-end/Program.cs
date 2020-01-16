@@ -34,6 +34,7 @@ namespace back_end
                     logging.AddConsole();
                     logging.AddDebug();
                 })
+                .UseSetting("https_port", "8080")
                 .UseUrls("http://0.0.0.0:8080")
                 .UseStartup<Startup>()
                 .Build();
