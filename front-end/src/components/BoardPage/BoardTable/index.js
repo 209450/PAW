@@ -10,7 +10,7 @@ import AddNewTaskModal from './AddNewTaskModal'
 
 export default class BoardTable extends Component {
 
-    static defaultProps = {
+    static defaultProps = { 
         name: "Table",
         taskList: [3, 5, 2, 6, 6]
     }
@@ -55,11 +55,7 @@ export default class BoardTable extends Component {
                 <Card.Header>
                     {name}
                 </Card.Header>
-                {this.state.taskList.map((task) =>
-                    <div className="row ">
-                        <BoardTask />
-                    </div>
-                )}
+                {this.props.children}
                 <Button onClick={this.addNewTaskCallback} className="new-task-button">&#43; Add Task </Button>
                 <Card.Footer>
                     <EditButton onClick={this.editButtonCallback}/>

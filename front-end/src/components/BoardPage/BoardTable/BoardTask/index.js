@@ -14,7 +14,7 @@ export default class BoardTask extends Component {
 
     state = {
         showModal: this.props.showModal
-    }
+    } 
 
     showEditModal = () =>{
         this.setState({showModal: true})

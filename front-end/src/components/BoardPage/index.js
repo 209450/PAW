@@ -6,6 +6,9 @@ import EditBoardModal from './EditBoardModal'
 import EditTaskDropdown from './BoardTable/EditTaskDropdown'
 import './BoardPage.css'
 import AddNewBoardModal from './AddNewBoardModal'
+import BoardTask from './BoardTable/BoardTask'
+import { gql } from 'apollo-boost'
+import { useQuery } from 'react-apollo'
 
 export default class BoardPage extends Component {
 
@@ -51,7 +54,7 @@ export default class BoardPage extends Component {
             <Container className="board-page" fluid>
                 <BoardNavBar editButtonCallback={this.editButtonCallback} newTableCallback={this.addNewTableCallback}/>
                 <CardDeck className="card-columns flex-row flex-nowrap">
-                    {this.state.tableList.map((table) => <BoardTable />)}
+                    <UserTables/>
                 </CardDeck>
                 
                 <EditBoardModal postURL="" show={showEditModal} onHide={this.hideEditModal}/>
@@ -59,4 +62,62 @@ export default class BoardPage extends Component {
             </Container>
         )
     }
+}
+
+const TABLES = gql`
+query {
+    user(name: "Steve"){
+      boards(id: 0){
+        tables{
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+function UserTables({ cardCallback }) {
+    const { loading, error, data } = useQuery(TABLES);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) {
+        console.log(error.networkError)
+        return <p>Error :(</p>;
+    }
+
+    return data.tables.map((table) => (
+        <BoardTable key={table.id} name={table.name}>
+            <UserTasks />
+        </BoardTable>
+    ));
+}
+
+const TASKS = gql`
+query {
+user(name: "Steve"){
+    boards(id: 0){
+      tables(id: 0){
+        tasks{
+          id
+          name
+        }
+      }
+    }
+  }
+}
+`;
+
+function UserTasks({ cardCallback }) {
+    const { loading, error, data } = useQuery(TASKS);
+    
+    if (loading) return <p>Loading...</p>;
+    if (error) {
+        console.log(error.networkError)
+        return <p>Error :(</p>;
+    }
+
+    return data.tables.map((task) => (
+        <BoardTask key={task.id} name={task.name}/>
+    ));
 }
