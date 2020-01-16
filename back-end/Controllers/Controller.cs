@@ -68,11 +68,11 @@ namespace Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]GraphQLRequest queryRequest, CancellationToken cancellationToken)
         {
-            HttpContext.Request.Headers.TryGetValue("Bearer", out var token);
+            /*HttpContext.Request.Headers.TryGetValue("Bearer", out var token);
             var jwtToken = new JwtSecurityToken(token);
             var claims = jwtToken.Claims.Where(c => c.Type.ToString() == "unique_name").Select(c => c.Value).SingleOrDefault();
             if (claims != getUserName(queryRequest.Query))
-                return StatusCode(403, "Odmowa dostepu");
+                return StatusCode(403, "Odmowa dostepu");*/
             
             var graphqlResult = await _graphqlAdapter.ExecuteToJsonAsync(
                 new GraphQLQuery
