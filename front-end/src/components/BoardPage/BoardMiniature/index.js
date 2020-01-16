@@ -37,7 +37,7 @@ export default class BoardMiniature extends Component {
         const { image, title, text, cardOnClick } = this.props
 
         let { editModalShow } = this.state
-
+        console.log(this.props.id)
 
         return (
             <Card className='card' onClick={cardOnClick} >

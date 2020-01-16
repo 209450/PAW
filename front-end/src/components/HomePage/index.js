@@ -44,7 +44,7 @@ export default class HomePage extends Component {
     }
 
     cardOnClick = (event) => {
-        this.setState({ redirectToBoard: <Redirect to={`/home/id`} /> })
+        this.setState({ redirectToBoard: <Redirect to={`/home/${this.props.key}`} /> })
     }
 
 
@@ -54,29 +54,30 @@ export default class HomePage extends Component {
         return (
             <div>
                 <CardColumns className="card-columns">
-                    {this.state.boardList.map((board) => <BoardMiniature cardOnClick={this.cardOnClick.bind(board)} />)}
+                    {/* {this.state.boardList.map((board) => <BoardMiniature cardOnClick={this.cardOnClick.bind(board)} />)} */}
+                    <UserBoards cardCallback={this.cardOnClick} />
                     <BoardNewCard onClick={this.openNewBoardModal} />
                     <NewBoardModal postURL="" show={newBoardModalShowState} onHide={this.onHideNewBoardModal} />
                 </CardColumns>
                 {this.state.redirectToBoard}
-                <ExchangeRates />
             </div>
         )
     }
 }
 
-const EXCHANGE_RATES = gql`
-{
-    users {
-      id
-      name
-      password
+const BOARDS = gql`
+query {
+    user(name: "Steve"){
+      boards{
+        id
+        name
+      }
     }
   }
 `;
 
-function ExchangeRates() {
-    const { loading, error, data } = useQuery(EXCHANGE_RATES);
+function UserBoards({ cardCallback }) {
+    const { loading, error, data } = useQuery(BOARDS);
 
     if (loading) return <p>Loading...</p>;
     if (error) {
@@ -84,11 +85,7 @@ function ExchangeRates() {
         return <p>Error :(</p>;
     }
 
-    return data.users.map(({ id, name, password }) => (
-        <div key={id}>
-            <p>
-                {id}: {name} : {password}
-            </p>
-        </div>
+    return data.boards.map((board) => (
+        <BoardMiniature key={board.id} id={board.id} title={board.name} cardOnClick={cardCallback.bind(board)} />
     ));
 }
